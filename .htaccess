@@ -1,0 +1,10 @@
+RewriteEngine On # Turn on the rewriting engine
+RewriteRule ^mahasiswa/?$ mahasiswa.php [NC,L]
+RewriteRule ^mahasiswa/([0-9]+)/?$ mahasiswa.php?id=$1 [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+# Return 404 if original request is .php
+RewriteCond %{THE_REQUEST} "^[^ ]* .*?\.php[? ].*$"
+RewriteRule .* - [L,R=404]
