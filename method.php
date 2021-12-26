@@ -6,13 +6,13 @@ class Apotekku{
 
     public function get_user($email){
         global $mysql;
-        $query = "SELECT * FROM user WHERE email = $email";
+        $query = "SELECT * FROM user WHERE email = '$email'";
         if (strlen($email) == 0) {
             return false;
         }
         $data = array();
         $result = $mysql->query($query);
-        if ($result) {
+        if ($result->num_rows > 0) {
             while ($row = $result->fetch_object()) {
                 $data[]=$row;
             }
